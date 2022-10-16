@@ -1,3 +1,4 @@
+from xml.dom.xmlbuilder import DocumentLS
 import numpy as np
 import math
 
@@ -48,8 +49,21 @@ class Corpus(object):
         # #############################
         # your code here
         # #############################
-        
-        pass    # REMOVE THIS
+
+        docsNum = 0
+        counter = 1
+        docs = self.documents
+
+        with open(self.documents_path) as line:
+            for docs in line.readlines():
+                docs = docs.rstrip('}\n ').strip('0\t').strip(' ').split('1\t')
+                self.documents.append(docs)
+                docsNum += 1
+                if (docsNum >= 1):
+                    counter += 1
+
+            self.number_of_documents = docsNum
+
 
     def build_vocabulary(self):
         """
